@@ -1,0 +1,45 @@
+create table customer
+(
+  customerId varchar(10) not null
+    primary key,
+  name       varchar(15) null,
+  address    varchar(20) null
+);
+
+create table item
+(
+  code        varchar(10)   not null
+    primary key,
+  description varchar(30)   null,
+  unitPrice   decimal(6, 2) null,
+  qtyOnHand   int(5)        null
+);
+
+create table `order`
+(
+  id         int         not null
+    primary key,
+  date       date        null,
+  customerId varchar(10) null,
+  constraint Order_ibfk_1
+  foreign key (customerId) references customer (customerId),
+  constraint FKckicmtwun913u69pha7agsgpd
+  foreign key (customerId) references customer (customerId)
+);
+
+create table orderdetail
+(
+  orderId   int           not null,
+  itemCode  varchar(10)   not null,
+  qty       int(5)        null,
+  unitPrice decimal(6, 2) null,
+  primary key (orderId, itemCode),
+  constraint FK21x4a3ee3h5uwombp0n7cayng
+  foreign key (orderId) references `order` (id),
+  constraint OrderDetail_ibfk_2
+  foreign key (itemCode) references item (code),
+  constraint FKtogd3d0kvb3mreeh4pn7qox19
+  foreign key (itemCode) references item (code),
+  constraint OrderDetail_ibfk_3
+  foreign key (orderId) references `order` (id)
+);
